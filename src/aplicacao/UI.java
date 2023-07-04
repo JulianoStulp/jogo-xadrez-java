@@ -8,6 +8,8 @@ import Xadrez.PecaXadrez;
 import Xadrez.PosicaoXadrez;
 
 public class UI {
+	
+	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
 
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_BLACK = "\u001B[30m";
@@ -28,6 +30,12 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
 
+	// https://stackoverflow.com/questions/2979383/java-clear-the-console
+	public static void limparTela() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+
 	public static PosicaoXadrez lerPosicaoXadrez(Scanner sc) {
 		try {
 			String s = sc.nextLine();
@@ -35,10 +43,10 @@ public class UI {
 			int linha = Integer.parseInt(s.substring(1));
 			return new PosicaoXadrez(coluna, linha);
 		} catch (RuntimeException e) {
-			throw new InputMismatchException("Erro lendo a posição do xadrez valores válidos de a1 até h8.");
+			throw new InputMismatchException("Erro ao ler a posição, valores válidos são de 'a1' até 'h8'.");
 		}
 	}
-	
+
 	public static void imprimePartida(PecaXadrez[][] pecas) {
 		for (int i = 0; i < pecas.length; i++) {
 			System.out.print((8 - i) + " ");
